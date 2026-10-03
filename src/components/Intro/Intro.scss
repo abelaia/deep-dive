@@ -1,0 +1,89 @@
+@use '../../styles/mixins' as *;
+
+.intro {
+  @include cover(fixed);
+  z-index: var(--z-intro);
+  display: grid;
+  place-items: center;
+  background: var(--c-night);
+  transition:
+    opacity var(--dur-intro) var(--ease-out),
+    visibility var(--dur-intro);
+
+  &--entered {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &__action {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-2xl);
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  &__ring {
+    position: relative;
+    width: var(--size-ring);
+    aspect-ratio: 1;
+    border: var(--size-line) solid var(--c-ink-faint);
+    border-radius: 50%;
+
+    &::before,
+    &::after {
+      content: '';
+      @include cover;
+      border: var(--size-line) solid var(--c-glow);
+      border-radius: 50%;
+      animation: intro-ping var(--dur-pulse) var(--ease-out) infinite;
+
+      @include reduced-motion {
+        animation: none;
+      }
+    }
+
+    &::after {
+      animation-delay: calc(var(--dur-pulse) / -2);
+    }
+  }
+
+  &__label {
+    @include display(title);
+    font-size: var(--fs-body);
+    letter-spacing: var(--ls-wide);
+  }
+
+  &__note {
+    @include label;
+  }
+
+  &__muted {
+    position: absolute;
+    bottom: var(--layout-pad);
+    padding: var(--space-xs);
+    border: 0;
+    background: none;
+    @include label;
+    cursor: pointer;
+    @include transition(color);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--c-ink);
+    }
+  }
+}
+
+@keyframes intro-ping {
+  from {
+    opacity: 1;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}

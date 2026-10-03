@@ -52,6 +52,10 @@ button {
   outline-offset: var(--space-2xs);
 }
 
+.page--locked {
+  overflow: hidden;
+}
+
 .story__zone {
   pointer-events: none;
 }

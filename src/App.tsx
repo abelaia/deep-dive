@@ -3,6 +3,7 @@ import { Button } from './components/Button/Button'
 import { Caption } from './components/Caption/Caption'
 import { Header } from './components/Header/Header'
 import { Hud } from './components/Hud/Hud'
+import { Intro } from './components/Intro/Intro'
 import { Ocean } from './components/Ocean/Ocean'
 import { useActiveZone } from './hooks/useActiveZone'
 import { useDive } from './hooks/useDive'
@@ -27,6 +28,7 @@ export default function App() {
   return (
     <div ref={rootRef}>
       <Ocean />
+      <Intro onEnter={sound.set} />
       <Header sound={sound.enabled} onToggleSound={sound.toggle} />
       <Caption active={active} aside={active === zones.length - 1 ? ascend : undefined} />
       <Hud active={active} />
