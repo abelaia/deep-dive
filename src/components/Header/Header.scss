@@ -1,0 +1,20 @@
+@use '../../styles/mixins' as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-ui);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--layout-pad);
+  mix-blend-mode: difference;
+  pointer-events: none;
+
+  &__brand {
+    @include text(brand, medium);
+    letter-spacing: var(--ls-wide);
+  }
+}

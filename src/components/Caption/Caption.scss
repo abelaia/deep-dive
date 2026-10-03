@@ -1,0 +1,86 @@
+@use '../../styles/mixins' as *;
+
+.caption {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--layout-pad) * 1.5);
+  z-index: var(--z-ui);
+  display: grid;
+  justify-items: center;
+  gap: var(--space-md);
+  width: var(--layout-caption);
+  text-align: center;
+  transform: translateX(-50%);
+  animation: caption-in var(--dur-caption) var(--ease-out) both;
+
+  &__kicker {
+    @include label;
+    color: var(--accent);
+  }
+
+  &__title {
+    @include display(title);
+  }
+
+  &__text {
+    color: var(--c-ink-soft);
+  }
+
+  &__aside {
+    margin-top: var(--space-sm);
+  }
+
+  &--hero {
+    width: min(100%, 92vw);
+  }
+
+  &--hero &__title {
+    @include display(hero);
+  }
+
+  &--hero &__text {
+    max-width: var(--layout-caption);
+  }
+
+  &__hint {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    @include label;
+  }
+
+  &__line {
+    position: relative;
+    width: var(--size-hint);
+    height: var(--size-line);
+    overflow: hidden;
+    background: var(--c-ink-faint);
+
+    &::after {
+      content: '';
+      @include cover;
+      background: var(--c-ink);
+      transform: translateX(-100%);
+      animation: caption-hint var(--dur-hint) var(--ease-out) infinite;
+
+      @include reduced-motion {
+        animation: none;
+      }
+    }
+  }
+}
+
+@keyframes caption-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    translate: 0 var(--space-lg);
+  }
+}
+
+@keyframes caption-hint {
+  to {
+    transform: translateX(100%);
+  }
+}

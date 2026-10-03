@@ -1,47 +1,22 @@
 @use '../../styles/mixins' as *;
 
 .button {
-  --button-color: var(--hud);
-  position: relative;
   display: inline-flex;
   align-items: center;
   gap: var(--space-sm);
-  padding: var(--space-md) var(--space-xl);
-  border: var(--border-hair) solid var(--button-color);
-  border-radius: var(--radius-none);
-  background: transparent;
-  color: var(--button-color);
-  @include mono(small, bold);
-  letter-spacing: var(--ls-wide);
-  text-transform: uppercase;
+  padding: var(--space-xs) 0;
+  border: 0;
+  border-bottom: var(--size-line) solid var(--c-ink-faint);
+  background: none;
+  @include label(small);
+  color: var(--c-ink);
   cursor: pointer;
-  pointer-events: auto;
-  @include transition(background-color, color, box-shadow);
+  @include transition(border-color, color, gap);
 
   &:hover,
   &:focus-visible {
-    background: var(--button-color);
-    color: var(--c-panel);
-    box-shadow: 0 0 var(--size-glow) var(--button-color);
-  }
-
-  &:disabled {
-    cursor: wait;
-  }
-
-  &--solid {
-    background: var(--button-color);
-    color: var(--c-panel);
-  }
-
-  &--danger {
-    --button-color: var(--c-red);
-    animation: button-alarm var(--dur-blink) steps(2) infinite;
-  }
-}
-
-@keyframes button-alarm {
-  50% {
-    box-shadow: 0 0 var(--size-glow) var(--button-color);
+    gap: var(--space-md);
+    border-color: var(--accent);
+    color: var(--accent);
   }
 }

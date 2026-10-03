@@ -27,53 +27,26 @@ $bp-md: map.get($breakpoints, md);
   inset: 0;
 }
 
-@mixin display($size, $weight: bold) {
+@mixin text($size: body, $weight: light) {
+  font-family: var(--font-base);
+  font-size: var(--fs-#{$size});
+  font-weight: var(--fw-#{$weight});
+}
+
+@mixin label($size: micro) {
+  @include text($size, regular);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--c-ink-soft);
+}
+
+@mixin display($size) {
   font-family: var(--font-display);
   font-size: var(--fs-#{$size});
-  font-weight: var(--fw-#{$weight});
-  text-transform: uppercase;
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-none);
   letter-spacing: var(--ls-tight);
-  line-height: var(--lh-tight);
-}
-
-@mixin mono($size: body, $weight: regular) {
-  font-family: var(--font-mono);
-  font-size: var(--fs-#{$size});
-  font-weight: var(--fw-#{$weight});
-}
-
-@mixin label($size: label) {
-  @include mono($size, medium);
-  letter-spacing: var(--ls-wider);
   text-transform: uppercase;
-  color: var(--hud-dim);
-}
-
-@mixin glow-text($color: var(--hud)) {
-  color: $color;
-  text-shadow: 0 0 var(--size-glow) $color;
-}
-
-@mixin panel {
-  border: var(--border-hair) solid var(--c-line);
-  background: linear-gradient(to bottom, var(--c-panel-2), var(--c-panel));
-}
-
-@mixin corner-marks($size) {
-  background-image:
-    linear-gradient(var(--hud), var(--hud)), linear-gradient(var(--hud), var(--hud)),
-    linear-gradient(var(--hud), var(--hud)), linear-gradient(var(--hud), var(--hud));
-  background-size:
-    $size var(--border-hair),
-    var(--border-hair) $size,
-    $size var(--border-hair),
-    var(--border-hair) $size;
-  background-position:
-    0 0,
-    0 0,
-    100% 100%,
-    100% 100%;
-  background-repeat: no-repeat;
 }
 
 @mixin transition($props...) {

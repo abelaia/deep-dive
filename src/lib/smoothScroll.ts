@@ -1,16 +1,13 @@
 import Lenis from 'lenis'
-import { gsap, ScrollTrigger } from './gsap'
+import { gsap } from './gsap'
 import { prefersReducedMotion } from './layout'
 import { SCROLL } from '../constants/config'
-import { storyState } from '../animation/storyState'
 
 let lenis: Lenis | null = null
 
 export function initSmoothScroll(): () => void {
   if (prefersReducedMotion()) return () => {}
   lenis = new Lenis({ lerp: SCROLL.lerp, wheelMultiplier: SCROLL.wheelMultiplier })
-  lenis.on('scroll', ScrollTrigger.update)
-  lenis.on('scroll', ({ velocity }: Lenis) => void (storyState.speed = velocity))
   const tick = (time: number) => lenis?.raf(time * 1000)
   gsap.ticker.add(tick)
   gsap.ticker.lagSmoothing(0)

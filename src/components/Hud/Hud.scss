@@ -1,0 +1,96 @@
+@use '../../styles/mixins' as *;
+
+.hud {
+  &__reading {
+    position: fixed;
+    top: calc(var(--layout-pad) * 2.4);
+    left: var(--layout-pad);
+    z-index: var(--z-ui);
+    pointer-events: none;
+  }
+
+  &__depth {
+    @include display(depth);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__unit {
+    margin-left: var(--space-xs);
+    @include text(body, light);
+    letter-spacing: 0;
+    color: var(--c-ink-soft);
+  }
+
+  &__meta {
+    margin-top: var(--space-xs);
+    @include label;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__rail {
+    position: fixed;
+    top: 50%;
+    right: var(--layout-pad);
+    z-index: var(--z-ui);
+    width: var(--size-tick);
+    height: var(--layout-rail-h);
+    background: linear-gradient(var(--c-ink-faint), var(--c-ink-faint)) center / var(--size-line) 100% no-repeat;
+    transform: translateY(-60%);
+
+    @include mobile {
+      right: calc(var(--layout-pad) * 0.6);
+    }
+  }
+
+  &__fill {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: var(--size-bar);
+    height: calc(var(--progress, 0) * 100%);
+    background: var(--accent);
+    box-shadow: 0 0 var(--space-sm) var(--accent);
+    transform: translateX(-50%);
+  }
+
+  &__tick {
+    position: absolute;
+    left: 50%;
+    width: var(--size-tick);
+    height: var(--size-tick);
+    padding: 0;
+    border: var(--size-line) solid var(--c-ink-soft);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    @include transition(background-color, border-color);
+
+    &--passed,
+    &--active {
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 50%;
+    right: calc(100% + var(--space-sm));
+    @include label;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translate(var(--space-xs), -50%);
+    @include transition(opacity, transform);
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  &__tick:hover &__label,
+  &__tick--active &__label {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
