@@ -1,0 +1,52 @@
+@use '../../styles/mixins' as *;
+
+.surface {
+  @include cover;
+  pointer-events: none;
+
+  &__sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 46%;
+    background: linear-gradient(to bottom, var(--c-sky-top), var(--c-sky-bottom));
+  }
+
+  &__sun {
+    position: absolute;
+    top: 22%;
+    right: 26%;
+    width: 16%;
+    aspect-ratio: 1;
+    border-radius: var(--radius-round);
+    background: var(--c-sun);
+    box-shadow: 0 0 60px 20px var(--c-sun);
+  }
+
+  &__waves {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40%;
+    height: 12%;
+  }
+
+  &__wave {
+    position: absolute;
+    inset: 0;
+    width: 200%;
+    height: 100%;
+    animation: surface-wave var(--dur-waves) linear infinite;
+
+    @include reduced-motion {
+      animation: none;
+    }
+  }
+}
+
+@keyframes surface-wave {
+  to {
+    transform: translateX(-50%);
+  }
+}

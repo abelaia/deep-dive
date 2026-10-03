@@ -1,0 +1,101 @@
+@use '../../styles/mixins' as *;
+
+.log {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  min-height: 0;
+  padding: var(--space-lg);
+  @include panel;
+  pointer-events: auto;
+  overflow-y: auto;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: var(--space-sm);
+    border-bottom: var(--border-hair) solid var(--c-line);
+  }
+
+  &__label,
+  &__index {
+    @include label;
+  }
+
+  &__history {
+    display: grid;
+    gap: var(--space-2xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__past {
+    display: flex;
+    gap: var(--space-sm);
+    @include mono(small);
+    text-transform: uppercase;
+    color: var(--hud-dim);
+    opacity: var(--o-muted);
+  }
+
+  &__past-index::after {
+    content: ' ✓';
+  }
+
+  &__entry {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  &__stamp {
+    @include label;
+    color: var(--hud);
+  }
+
+  &__title {
+    @include display(title, black);
+    @include glow-text;
+  }
+
+  &__text {
+    @include mono(body);
+    line-height: var(--lh-base);
+    color: var(--hud);
+    opacity: 0.9;
+  }
+
+  &__cursor {
+    display: inline-block;
+    width: var(--size-cursor);
+    height: 1.1em;
+    margin-left: var(--space-3xs);
+    vertical-align: text-bottom;
+    background: var(--hud);
+    animation: log-blink var(--dur-blink) steps(2) infinite;
+
+    &--idle {
+      opacity: var(--o-dim);
+    }
+  }
+
+  &__aside {
+    margin-top: var(--space-sm);
+    opacity: 0;
+    transform: translateY(var(--space-sm));
+    @include transition(opacity, transform);
+
+    &--visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@keyframes log-blink {
+  50% {
+    visibility: hidden;
+  }
+}

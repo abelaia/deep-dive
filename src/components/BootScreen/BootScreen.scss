@@ -1,0 +1,111 @@
+@use '../../styles/mixins' as *;
+
+.boot {
+  --p: 0;
+  @include cover(fixed);
+  z-index: var(--z-boot);
+  display: grid;
+  place-items: center;
+  padding: var(--layout-pad);
+  background: var(--c-panel);
+
+  &__panel {
+    display: grid;
+    gap: var(--space-xl);
+    width: min(100%, var(--layout-boot-w));
+    padding: var(--space-3xl);
+    @include panel;
+    @include corner-marks(var(--space-lg));
+
+    @include mobile {
+      padding: var(--space-xl);
+    }
+  }
+
+  &__title {
+    @include display(title, black);
+    @include glow-text;
+  }
+
+  &__checks {
+    display: grid;
+    gap: var(--space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__check {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    @include mono(boot);
+    text-transform: uppercase;
+    color: var(--hud-dim);
+    opacity: var(--o-dim);
+
+    &--current {
+      opacity: 1;
+    }
+
+    &--passed {
+      opacity: 1;
+      color: var(--hud);
+    }
+  }
+
+  &__leader {
+    flex: 1;
+    border-bottom: var(--border-hair) dotted var(--c-line-strong);
+  }
+
+  &__check--current &__status {
+    animation: boot-blink var(--dur-blink) steps(2) infinite;
+  }
+
+  &__check--passed &__status {
+    @include glow-text;
+  }
+
+  &__count {
+    @include display(value, black);
+    font-variant-numeric: tabular-nums;
+    @include glow-text;
+  }
+
+  &__bar {
+    display: block;
+    height: var(--size-bar);
+    background: var(--hud);
+    box-shadow: 0 0 var(--size-glow) var(--hud);
+    transform: scaleX(var(--p));
+    transform-origin: left;
+  }
+
+  &__actions,
+  &__note {
+    opacity: 0;
+    @include transition(opacity);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  &__note {
+    @include label(micro);
+  }
+
+  &--ready &__actions,
+  &--ready &__note {
+    opacity: 1;
+  }
+}
+
+@keyframes boot-blink {
+  50% {
+    opacity: 0;
+  }
+}

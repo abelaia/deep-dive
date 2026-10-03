@@ -1,0 +1,34 @@
+[
+  {
+    "id": "angler",
+    "name": "Удильщик",
+    "latin": "Melanocetus johnsonii",
+    "x": 64,
+    "y": 62,
+    "size": 30
+  },
+  {
+    "id": "hatchet",
+    "name": "Рыба-топорик",
+    "latin": "Argyropelecus aculeatus",
+    "x": 32,
+    "y": 36,
+    "size": 15
+  },
+  {
+    "id": "vampire",
+    "name": "Адский вампир",
+    "latin": "Vampyroteuthis infernalis",
+    "x": 68,
+    "y": 26,
+    "size": 16
+  },
+  {
+    "id": "gulper",
+    "name": "Мешкорот",
+    "latin": "Eurypharynx pelecanoides",
+    "x": 38,
+    "y": 76,
+    "size": 36
+  }
+]

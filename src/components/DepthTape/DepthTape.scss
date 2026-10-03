@@ -1,0 +1,73 @@
+@use '../../styles/mixins' as *;
+
+.depth-tape {
+  --depth: 0;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-left: var(--border-hair) solid var(--c-line);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  pointer-events: auto;
+
+  @include mobile {
+    display: none;
+  }
+
+  &__strip {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(calc(var(--depth) * var(--scale) * -1px));
+  }
+
+  &__mark,
+  &__zone {
+    position: absolute;
+    top: calc(var(--at) * var(--scale) * 1px);
+    transform: translateY(-50%);
+  }
+
+  &__mark {
+    left: 0;
+    width: var(--space-sm);
+    height: var(--border-hair);
+    background: var(--hud-dim);
+
+    &--major {
+      width: var(--space-lg);
+      background: var(--hud);
+      @include mono(micro);
+      line-height: 0;
+      text-indent: calc(var(--space-lg) + var(--space-xs));
+      white-space: nowrap;
+      color: var(--hud);
+    }
+  }
+
+  &__zone {
+    right: var(--space-xs);
+    padding: 0;
+    border: 0;
+    background: none;
+    @include label(micro);
+    writing-mode: vertical-rl;
+    cursor: pointer;
+    @include transition(color);
+
+    &:hover,
+    &--active {
+      color: var(--hud);
+    }
+  }
+
+  &__pointer {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: var(--border-base);
+    background: var(--c-amber);
+    box-shadow: 0 0 var(--size-glow) var(--c-amber);
+  }
+}

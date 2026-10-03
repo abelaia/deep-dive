@@ -1,0 +1,200 @@
+@use '../../styles/mixins' as *;
+
+.porthole {
+  position: relative;
+  width: var(--layout-porthole);
+  aspect-ratio: 1;
+
+  @include mobile {
+    width: var(--layout-porthole-mobile);
+  }
+
+  &__window {
+    --fx: 50%;
+    --fy: 50%;
+    --fr: 25%;
+    position: absolute;
+    inset: var(--size-rim);
+    z-index: var(--z-porthole);
+    overflow: hidden;
+    border-radius: var(--radius-round);
+    background: var(--water);
+    isolation: isolate;
+  }
+
+  &__rays {
+    @include cover;
+    background: repeating-linear-gradient(100deg, var(--c-ray) 0 3%, transparent 3% 8%, var(--c-ray) 8% 9.5%, transparent 9.5% 15%);
+    mask-image: linear-gradient(to bottom, #000 10%, transparent 85%);
+    transform-origin: top center;
+    animation: porthole-rays var(--dur-rays) var(--ease-sway) infinite alternate;
+
+    @include reduced-motion {
+      animation: none;
+    }
+  }
+
+  &__caustics {
+    @include cover;
+    background:
+      repeating-radial-gradient(circle at 30% 40%, var(--c-caustic) 0 2px, transparent 3px 26px),
+      repeating-radial-gradient(circle at 70% 65%, var(--c-caustic) 0 2px, transparent 3px 34px);
+    background-size: 160% 160%;
+    mix-blend-mode: screen;
+    mask-image: linear-gradient(to bottom, #000 20%, transparent 90%);
+    animation: porthole-caustics var(--dur-caustics) var(--ease-sway) infinite alternate;
+
+    @include reduced-motion {
+      animation: none;
+    }
+  }
+
+  &__whale {
+    position: absolute;
+    top: 34%;
+    left: 100%;
+    width: 70%;
+    fill: var(--c-whale);
+  }
+
+  &__jellies {
+    @include cover;
+    visibility: hidden;
+  }
+
+  &__jelly {
+    position: absolute;
+    overflow: visible;
+    filter: drop-shadow(0 0 var(--size-glow) var(--c-jelly));
+    animation: porthole-bob var(--dur-bob) var(--ease-sway) infinite alternate;
+
+    @include reduced-motion {
+      animation: none;
+    }
+  }
+
+  &__jelly-bell {
+    fill: var(--c-jelly);
+    stroke: var(--c-jelly-edge);
+    stroke-width: 1.5;
+  }
+
+  &__jelly-tentacle {
+    fill: none;
+    stroke: var(--c-jelly-edge);
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    opacity: var(--o-muted);
+  }
+
+  &__canvas {
+    @include cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__beam {
+    @include cover;
+    opacity: 0;
+    background: radial-gradient(circle var(--fr) at var(--fx) var(--fy), var(--c-beam), transparent 100%);
+  }
+
+  &__cracks {
+    @include cover;
+    z-index: var(--z-glass);
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: var(--c-crack);
+    stroke-width: 0.35;
+    stroke-linecap: round;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    pointer-events: none;
+  }
+
+  &__glass {
+    @include cover;
+    z-index: var(--z-glass);
+    border-radius: var(--radius-round);
+    background:
+      radial-gradient(ellipse 60% 35% at 32% 18%, var(--c-glass), transparent 70%),
+      radial-gradient(circle at 50% 50%, transparent 58%, var(--c-shade) 100%);
+    box-shadow: inset 0 0 calc(var(--size-rim) * 3) var(--c-shade);
+    pointer-events: none;
+  }
+
+  &__rim {
+    @include cover;
+    border-radius: var(--radius-round);
+    background: conic-gradient(from 210deg, var(--c-metal-1), var(--c-metal-2), var(--c-metal-3), var(--c-metal-2), var(--c-metal-1), var(--c-metal-2), var(--c-metal-1));
+    box-shadow:
+      0 0 0 var(--border-hair) var(--c-line-strong),
+      0 var(--space-xl) var(--space-3xl) var(--c-shade);
+  }
+
+  &__rivet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--size-rivet);
+    height: var(--size-rivet);
+    margin: calc(var(--size-rivet) * -0.5);
+    border-radius: var(--radius-round);
+    background: radial-gradient(circle at 35% 35%, var(--c-metal-3), var(--c-metal-2));
+    transform: rotate(calc(var(--i) * 360deg / var(--rivets))) translateY(calc(var(--layout-porthole) * -0.5 + var(--size-rim) * 0.5));
+
+    @include mobile {
+      transform: rotate(calc(var(--i) * 360deg / var(--rivets))) translateY(calc(var(--layout-porthole-mobile) * -0.5 + var(--size-rim) * 0.5));
+    }
+  }
+
+  &__alarm {
+    position: absolute;
+    left: 50%;
+    top: 12%;
+    z-index: var(--z-ui);
+    padding: var(--space-xs) var(--space-md);
+    border: var(--border-hair) solid var(--c-red);
+    @include label(small);
+    color: var(--c-red);
+    background: var(--c-shade);
+    white-space: nowrap;
+    visibility: hidden;
+    transform: translateX(-50%);
+    animation: porthole-blink var(--dur-blink) steps(2) infinite;
+  }
+}
+
+@keyframes porthole-rays {
+  from {
+    transform: skewX(-4deg);
+  }
+  to {
+    transform: skewX(4deg);
+  }
+}
+
+@keyframes porthole-caustics {
+  from {
+    background-position: 0 0, 100% 0;
+  }
+  to {
+    background-position: 30% 20%, 60% 30%;
+  }
+}
+
+@keyframes porthole-bob {
+  from {
+    transform: translateY(-4%);
+  }
+  to {
+    transform: translateY(4%);
+  }
+}
+
+@keyframes porthole-blink {
+  50% {
+    opacity: 0.25;
+  }
+}

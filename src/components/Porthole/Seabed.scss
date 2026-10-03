@@ -1,0 +1,64 @@
+@use '../../styles/mixins' as *;
+
+.seabed {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 38%;
+
+  &__ground {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__far {
+    fill: var(--c-seabed-edge);
+  }
+
+  &__near {
+    fill: var(--c-seabed);
+    stroke: var(--c-silt);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  &__blob {
+    fill: var(--c-silt);
+  }
+
+  &__cucumber {
+    position: absolute;
+    bottom: 32%;
+    z-index: 1;
+    overflow: visible;
+    animation: seabed-crawl linear infinite;
+
+    @include reduced-motion {
+      animation: none;
+      left: var(--start);
+    }
+  }
+
+  &__cucumber-body {
+    fill: var(--c-jelly);
+  }
+
+  &__cucumber-legs {
+    fill: none;
+    stroke: var(--c-jelly-edge);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+}
+
+@keyframes seabed-crawl {
+  from {
+    left: 100%;
+  }
+  to {
+    left: -20%;
+  }
+}

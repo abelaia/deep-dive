@@ -1,0 +1,21 @@
+[
+  { "art": "tropical", "zone": "sunlight", "y": 30, "size": 6, "duration": 14, "delay": 0, "direction": "left", "color": "#ffd23f" },
+  { "art": "tropical", "zone": "sunlight", "y": 34, "size": 5, "duration": 14, "delay": -0.6, "direction": "left", "color": "#ffd23f" },
+  { "art": "tropical", "zone": "sunlight", "y": 27, "size": 4, "duration": 14, "delay": -1.1, "direction": "left", "color": "#ffd23f" },
+  { "art": "tropical", "zone": "sunlight", "y": 72, "size": 5, "duration": 11, "delay": -4, "direction": "right", "color": "#4fc3f7" },
+  { "art": "tropical", "zone": "sunlight", "y": 76, "size": 4, "duration": 11, "delay": -4.5, "direction": "right", "color": "#ff8a3d" },
+  { "art": "turtle", "zone": "sunlight", "y": 58, "size": 24, "duration": 30, "delay": -8, "direction": "right", "color": "#5f8a5a" },
+  { "art": "manta", "zone": "sunlight", "y": 18, "size": 34, "duration": 38, "delay": -20, "direction": "left", "color": "#1d3c55" },
+  { "art": "shark", "zone": "twilight", "y": 62, "size": 48, "duration": 24, "delay": -6, "direction": "left", "color": "#082338" },
+  { "art": "squid", "zone": "twilight", "y": 22, "size": 8, "duration": 16, "delay": -2, "direction": "up", "color": "#7a3b4d" },
+  { "art": "lanternfish", "zone": "twilight", "y": 70, "size": 6, "duration": 13, "delay": -1, "direction": "up", "color": "#0e2234" },
+  { "art": "lanternfish", "zone": "twilight", "y": 78, "size": 5, "duration": 15, "delay": -6, "direction": "up", "color": "#0e2234" },
+  { "art": "lanternfish", "zone": "twilight", "y": 64, "size": 5, "duration": 17, "delay": -10, "direction": "up", "color": "#0e2234" },
+  { "art": "siphonophore", "zone": "twilight", "y": 84, "size": 60, "duration": 44, "delay": -12, "direction": "left", "color": "#0b1d2c" },
+  { "art": "combjelly", "zone": "midnight", "y": 18, "size": 7, "duration": 26, "delay": -4, "direction": "up", "color": "#0a1826" },
+  { "art": "combjelly", "zone": "midnight", "y": 84, "size": 6, "duration": 32, "delay": -16, "direction": "up", "color": "#0a1826" },
+  { "art": "lanternfish", "zone": "midnight", "y": 50, "size": 5, "duration": 12, "delay": -3, "direction": "left", "color": "#03080e" },
+  { "art": "siphonophore", "zone": "midnight", "y": 12, "size": 70, "duration": 50, "delay": -30, "direction": "right", "color": "#03080e" },
+  { "art": "dumbo", "zone": "abyss", "y": 46, "size": 18, "duration": 34, "delay": -10, "direction": "right", "color": "#e7a3a8" },
+  { "art": "combjelly", "zone": "abyss", "y": 70, "size": 6, "duration": 30, "delay": -8, "direction": "up", "color": "#05090f" }
+]

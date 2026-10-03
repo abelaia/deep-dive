@@ -1,0 +1,38 @@
+@use '../../styles/mixins' as *;
+
+.spectrum {
+  display: grid;
+  gap: var(--space-sm);
+
+  &__bars {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-2xs);
+  }
+
+  &__item {
+    display: grid;
+    gap: var(--space-2xs);
+  }
+
+  &__bar {
+    display: block;
+    height: var(--size-spectrum-h);
+    transform-origin: bottom;
+    @include transition(opacity, transform);
+
+    &--lost {
+      opacity: 0.12;
+      transform: scaleY(0.25);
+    }
+  }
+
+  &__depth {
+    @include label(micro);
+  }
+
+  &__caption {
+    @include label(small);
+    color: var(--c-amber);
+  }
+}

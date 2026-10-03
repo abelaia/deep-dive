@@ -1,0 +1,85 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'variables' as *;
+
+$bp-md: map.get($breakpoints, md);
+
+@mixin md-up {
+  @media (min-width: #{$bp-md}px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$bp-md - 1}px) {
+    @content;
+  }
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin cover($position: absolute) {
+  position: $position;
+  inset: 0;
+}
+
+@mixin display($size, $weight: bold) {
+  font-family: var(--font-display);
+  font-size: var(--fs-#{$size});
+  font-weight: var(--fw-#{$weight});
+  text-transform: uppercase;
+  letter-spacing: var(--ls-tight);
+  line-height: var(--lh-tight);
+}
+
+@mixin mono($size: body, $weight: regular) {
+  font-family: var(--font-mono);
+  font-size: var(--fs-#{$size});
+  font-weight: var(--fw-#{$weight});
+}
+
+@mixin label($size: label) {
+  @include mono($size, medium);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--hud-dim);
+}
+
+@mixin glow-text($color: var(--hud)) {
+  color: $color;
+  text-shadow: 0 0 var(--size-glow) $color;
+}
+
+@mixin panel {
+  border: var(--border-hair) solid var(--c-line);
+  background: linear-gradient(to bottom, var(--c-panel-2), var(--c-panel));
+}
+
+@mixin corner-marks($size) {
+  background-image:
+    linear-gradient(var(--hud), var(--hud)), linear-gradient(var(--hud), var(--hud)),
+    linear-gradient(var(--hud), var(--hud)), linear-gradient(var(--hud), var(--hud));
+  background-size:
+    $size var(--border-hair),
+    var(--border-hair) $size,
+    $size var(--border-hair),
+    var(--border-hair) $size;
+  background-position:
+    0 0,
+    0 0,
+    100% 100%,
+    100% 100%;
+  background-repeat: no-repeat;
+}
+
+@mixin transition($props...) {
+  $list: ();
+  @each $prop in $props {
+    $list: list.append($list, $prop var(--dur-fast) var(--ease-out), comma);
+  }
+  transition: $list;
+}

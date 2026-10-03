@@ -1,0 +1,19 @@
+{
+  "maxDepth": 10935,
+  "crackAt": 9000,
+  "lightOnePercentAt": 200,
+  "temperature": [
+    [0, 26],
+    [200, 15],
+    [1000, 4],
+    [4000, 2],
+    [10935, 2]
+  ],
+  "spectrum": [
+    { "name": "красный", "color": "#e8483b", "depth": 15 },
+    { "name": "оранжевый", "color": "#f28a2e", "depth": 30 },
+    { "name": "жёлтый", "color": "#f2d03b", "depth": 60 },
+    { "name": "зелёный", "color": "#48c46a", "depth": 110 },
+    { "name": "синий", "color": "#3b7cf2", "depth": 1000 }
+  ]
+}
